@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<title>心の中の2人と、聞き手の私</title>
+<style>
+:root{
+  --paper:#F6F4EE;
+  --ink:#26262E;
+  --ink-soft:#5A5A63;
+  --blue:#3A6EA5;
+  --blue-soft:#7FA8CF;
+  --blue-wash:rgba(58,110,165,.08);
+  --gray:#8B8578;
+  --gray-wash:rgba(139,133,120,.10);
+  --line:rgba(38,38,46,.16);
+  --card:#FDFCF9;
+  --shadow:0 1px 2px rgba(38,38,46,.05),0 8px 24px rgba(38,38,46,.06);
+  --serif:"Hiragino Mincho ProN","Yu Mincho","Noto Serif JP",serif;
+  --sans:"Hiragino Kaku Gothic ProN","Yu Gothic Medium","Yu Gothic",sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --paper:#14161B;
+    --ink:#E8E5DD;
+    --ink-soft:#A0A0A8;
+    --blue:#7FA8CF;
+    --blue-soft:#5B87B5;
+    --blue-wash:rgba(127,168,207,.10);
+    --gray:#9A9488;
+    --gray-wash:rgba(154,148,136,.12);
+    --line:rgba(232,229,221,.16);
+    --card:#1C1F26;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+  }
+}
+:root[data-theme="light"]{
+  --paper:#F6F4EE; --ink:#26262E; --ink-soft:#5A5A63;
+  --blue:#3A6EA5; --blue-soft:#7FA8CF; --blue-wash:rgba(58,110,165,.08);
+  --gray:#8B8578; --gray-wash:rgba(139,133,120,.10);
+  --line:rgba(38,38,46,.16); --card:#FDFCF9;
+  --shadow:0 1px 2px rgba(38,38,46,.05),0 8px 24px rgba(38,38,46,.06);
+}
+:root[data-theme="dark"]{
+  --paper:#14161B; --ink:#E8E5DD; --ink-soft:#A0A0A8;
+  --blue:#7FA8CF; --blue-soft:#5B87B5; --blue-wash:rgba(127,168,207,.10);
+  --gray:#9A9488; --gray-wash:rgba(154,148,136,.12);
+  --line:rgba(232,229,221,.16); --card:#1C1F26;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 8px 24px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--sans);line-height:1.9;font-size:16px;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:680px;margin:0 auto;padding:0 24px 96px}
+a{color:var(--blue)}
+
+/* ---------- hero ---------- */
+header{padding:72px 0 8px;text-align:left}
+.eyebrow{
+  font-size:12px;letter-spacing:.18em;color:var(--blue);
+  text-transform:uppercase;margin:0 0 20px;
+}
+h1{
+  font-family:var(--serif);font-weight:600;
+  font-size:clamp(28px,6vw,40px);line-height:1.5;
+  margin:0 0 8px;text-wrap:balance;
+}
+.hero-note{color:var(--ink-soft);font-size:14px;margin:12px 0 0}
+.curve{display:block;width:100%;height:64px;margin:8px 0 0}
+.curve path{fill:none;stroke:var(--blue);stroke-width:2.5;opacity:.85}
+
+.cast{
+  display:flex;flex-direction:column;gap:14px;
+  margin:36px 0 0;padding:22px 24px;
+  background:var(--card);border:1px solid var(--line);
+  border-radius:16px;box-shadow:var(--shadow);
+}
+.cast-item{display:flex;gap:16px;align-items:baseline}
+.cast-name{
+  font-family:var(--serif);font-weight:600;font-size:15px;
+  margin:0;flex:0 0 7.5em;
+}
+.cast-name.jr-c{color:var(--blue)}
+.cast-name.ac-c{color:var(--gray)}
+.cast-desc{margin:0;font-size:13.5px;line-height:1.9;color:var(--ink-soft)}
+.cast-desc b{color:var(--ink);font-weight:600}
+@media(max-width:520px){.cast-item{flex-direction:column;gap:2px}.cast-name{flex:none}}
+.spine{
+  font-family:var(--serif);font-size:19px;line-height:2.1;
+  border-left:3px solid var(--blue);padding:4px 0 4px 20px;
+  margin:40px 0 0;
+}
+.spine em{font-style:normal;color:var(--blue)}
+
+/* ---------- sections ---------- */
+section{margin-top:88px}
+h2{
+  font-family:var(--serif);font-weight:600;font-size:22px;
+  margin:0 0 6px;text-wrap:balance;
+}
+.sub{color:var(--ink-soft);font-size:14px;margin:0 0 28px}
+
+/* ---------- phase control ---------- */
+.seg{
+  display:flex;gap:0;border:1px solid var(--line);border-radius:999px;
+  overflow:hidden;background:var(--card);box-shadow:var(--shadow);
+}
+.seg button{
+  flex:1;padding:12px 4px;border:0;background:transparent;color:var(--ink-soft);
+  font-family:var(--sans);font-size:14px;cursor:pointer;
+  transition:background .25s,color .25s;
+}
+.seg button:focus-visible{outline:2px solid var(--blue);outline-offset:-2px}
+.seg button[aria-pressed="true"]{background:var(--blue);color:var(--paper);font-weight:600}
+.seg .num{display:block;font-size:10px;letter-spacing:.15em;opacity:.7}
+
+/* ---------- model diagram ---------- */
+.diagram{margin-top:28px}
+.me-card{
+  background:var(--card);border:1px solid var(--line);border-radius:16px;
+  padding:20px 22px;box-shadow:var(--shadow);
+}
+.role{
+  font-size:11px;letter-spacing:.16em;color:var(--ink-soft);
+  margin:0 0 6px;
+}
+.me-card .say{
+  font-family:var(--serif);font-size:16px;line-height:1.9;margin:0;
+  min-height:3.8em;transition:opacity .3s;
+}
+.listen{
+  text-align:center;color:var(--ink-soft);font-size:13px;
+  padding:14px 0;letter-spacing:.1em;
+}
+.voices{display:flex;gap:16px}
+.voice{
+  flex:1;border-radius:16px;padding:18px 18px 16px;
+  border:1px solid var(--line);background:var(--card);
+  box-shadow:var(--shadow);
+  transition:opacity .35s,border-color .35s,transform .35s;
+}
+.voice .name{font-family:var(--serif);font-size:17px;font-weight:600;margin:0 0 2px}
+.voice .kind{font-size:11px;letter-spacing:.1em;color:var(--ink-soft);margin:0 0 12px}
+.voice .say{
+  font-family:var(--serif);font-size:15px;line-height:1.9;margin:0;
+  min-height:5.5em;transition:opacity .3s;
+}
+.voice .tag{
+  display:inline-block;margin-top:12px;font-size:11px;letter-spacing:.08em;
+  padding:3px 10px;border-radius:999px;transition:background .3s,color .3s;
+}
+.voice.jr{border-top:3px solid var(--blue)}
+.voice.jr .name{color:var(--blue)}
+.voice.jr .tag{background:var(--blue-wash);color:var(--blue)}
+.voice.ac{border-top:3px solid var(--gray)}
+.voice.ac .name{color:var(--gray)}
+.voice.ac .tag{background:var(--gray-wash);color:var(--gray)}
+.voice.dim{opacity:.42;transform:scale(.985)}
+.result{
+  margin-top:20px;padding:16px 20px;border-radius:12px;
+  background:var(--blue-wash);font-size:14.5px;line-height:1.9;
+  transition:opacity .3s;
+}
+.result strong{font-weight:600}
+
+/* ---------- litmus ---------- */
+.litmus-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:24px}
+@media(max-width:520px){.litmus-grid{grid-template-columns:1fr}.voices{flex-direction:column}}
+.chip{
+  border:1px solid var(--line);border-radius:14px;background:var(--card);
+  padding:18px;cursor:pointer;text-align:left;font-family:var(--sans);
+  color:var(--ink);box-shadow:var(--shadow);
+  transition:border-color .25s;position:relative;
+}
+.chip:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.chip .phrase{font-family:var(--serif);font-size:15.5px;line-height:1.9;margin:0}
+.chip .hint{font-size:11.5px;color:var(--ink-soft);margin:10px 0 0;letter-spacing:.06em}
+.chip .answer{
+  display:none;margin:12px 0 0;font-size:13.5px;line-height:1.8;
+  padding-top:12px;border-top:1px dashed var(--line);
+}
+.chip.open .answer{display:block}
+.chip.open .hint{display:none}
+.chip.open.is-jr{border-color:var(--blue)}
+.chip.open.is-ac{border-color:var(--gray)}
+.chip .who{font-weight:600}
+.chip.is-jr .who{color:var(--blue)}
+.chip.is-ac .who{color:var(--gray)}
+.rule{
+  margin-top:28px;font-family:var(--serif);font-size:16px;line-height:2.1;
+  border-left:3px solid var(--gray);padding-left:20px;
+}
+.rule b{color:var(--blue);font-weight:600}
+
+/* ---------- timeline meters ---------- */
+.time-seg{max-width:360px;margin:0 auto}
+.meters{
+  margin-top:26px;background:var(--card);border:1px solid var(--line);
+  border-radius:16px;padding:26px 24px;box-shadow:var(--shadow);
+}
+.meter{margin-bottom:22px}
+.meter:last-child{margin-bottom:0}
+.meter .label{display:flex;justify-content:space-between;font-size:13px;margin-bottom:8px}
+.meter .label .state{color:var(--ink-soft);transition:color .3s}
+.bar{height:10px;border-radius:999px;background:var(--line);overflow:hidden}
+.fill{
+  height:100%;border-radius:999px;width:0;
+  transition:width .6s cubic-bezier(.4,0,.2,1),background .4s;
+}
+.fill.curiosity{background:var(--blue)}
+.fill.friction{background:var(--gray)}
+.meter-note{
+  margin-top:20px;font-size:14px;line-height:1.9;color:var(--ink-soft);
+  transition:opacity .3s;min-height:5.5em;
+}
+.meter-note b{color:var(--ink)}
+
+/* ---------- caveat ---------- */
+.caveat{
+  border:1px dashed var(--line);border-radius:16px;padding:26px 26px;
+  background:transparent;
+}
+.caveat h2{font-size:18px}
+.caveat p{margin:12px 0 0;font-size:14.5px;line-height:2}
+footer{
+  margin-top:88px;padding-top:24px;border-top:1px solid var(--line);
+  font-size:12.5px;color:var(--ink-soft);line-height:1.9;
+}
+@media (prefers-reduced-motion: reduce){
+  *{transition:none !important}
+}
+</style>
+
+<div class="wrap">
+<header>
+  <p class="eyebrow">Blue Curve / 気質のセルフモデル</p>
+  <h1>心の中の2人と、<br>聞き手の私</h1>
+  <svg class="curve" viewBox="0 0 680 64" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,54 C170,54 230,10 340,26 C450,42 540,6 680,14"/>
+  </svg>
+  <p class="hero-note">これは確定した気質論ではなく、自分の実感から組んだセルフモデル。「HSS型HSPとはこういうもの」ではなく、「私はこう感じている人間です」という一枚。</p>
+
+  <div class="cast">
+    <div class="cast-item">
+      <p class="cast-name jr-c">Jr.</p>
+      <p class="cast-desc">生まれつきの自分。<b>好奇心（HSS）「やりたい」</b>と<b>違和感（HSP）「なんかやだ」</b>の両方を持つ。直感＝Jr.の声。</p>
+    </div>
+    <div class="cast-item">
+      <p class="cast-name ac-c">Ardar Codar</p>
+      <p class="cast-desc">世間の常識・損得・これまでの経験。あとから入ってきた声。</p>
+    </div>
+    <div class="cast-item">
+      <p class="cast-name">聞き手の私</p>
+      <p class="cast-desc">現実の私。2人の声を聞いて、どちらを採用するかを選ぶ。</p>
+    </div>
+  </div>
+
+  <p class="spine">採用する声を、Ardar Codar から <em>Jr.</em> に切り替えた。<br>それが、好奇心と違和感という直感を頼りに生きる、ということ。</p>
+</header>
+
+<!-- ================= 主導権 ================= -->
+<section aria-labelledby="h-phase">
+  <h2 id="h-phase">主導権は、動かせる</h2>
+  <p class="sub">同じ2人でも、どちらの声を採用するかで、消耗にも没頭にもなる。切り替えて見てください。</p>
+
+  <div class="seg" role="group" aria-label="時期の切り替え">
+    <button type="button" data-phase="0" aria-pressed="true"><span class="num">むかし</span>仕事をしてた頃</button>
+    <button type="button" data-phase="1" aria-pressed="false"><span class="num">実験</span>Jr.に従ってみる</button>
+    <button type="button" data-phase="2" aria-pressed="false"><span class="num">現在地</span>両方聞く</button>
+  </div>
+
+  <div class="diagram">
+    <div class="me-card">
+      <p class="role">聞き手の私（現実の私）… 最終決定はここ</p>
+      <p class="say" id="me-say"></p>
+    </div>
+    <p class="listen">↑ 心の中の2人の声を聞いて、どちらを採用するかを選ぶ ↑</p>
+    <div class="voices">
+      <div class="voice jr" id="v-jr">
+        <p class="name">Jr.</p>
+        <p class="kind">生の自分・気質（好奇心と違和感の両方を持つ）</p>
+        <p class="say" id="jr-say"></p>
+        <span class="tag" id="jr-tag"></span>
+      </div>
+      <div class="voice ac" id="v-ac">
+        <p class="name">Ardar Codar</p>
+        <p class="kind">世間の常識・損得・経験（後天的にインストールされたOS）</p>
+        <p class="say" id="ac-say"></p>
+        <span class="tag" id="ac-tag"></span>
+      </div>
+    </div>
+    <div class="result" id="phase-result"></div>
+  </div>
+</section>
+
+<!-- ================= リトマス ================= -->
+<section aria-labelledby="h-litmus">
+  <h2 id="h-litmus">リトマス試験紙 : 理由の有無</h2>
+  <p class="sub">ブレーキがかかったとき、それが誰の声かを見分ける基準。タップして確かめてください。</p>
+
+  <div class="litmus-grid">
+    <button class="chip is-ac" type="button">
+      <p class="phrase">「やめとけ。損するよ」</p>
+      <p class="hint">これは誰の声？ → タップ</p>
+      <div class="answer"><span class="who">Ardar Codar</span> の声。<br>「損する」という<b>理由がある</b>。守ろうとしてくれている後天OSのブレーキ。</div>
+    </button>
+    <button class="chip is-jr" type="button">
+      <p class="phrase">「なんかやだ。理由は、言えない」</p>
+      <p class="hint">これは誰の声？ → タップ</p>
+      <div class="answer"><span class="who">Jr.</span> の声。<br><b>理由がない</b>のが目印。これは気質の違和感で、最終拒否権を持つ。</div>
+    </button>
+    <button class="chip is-ac" type="button">
+      <p class="phrase">「それ、意味あるの？ 世間体も悪いよ」</p>
+      <p class="hint">これは誰の声？ → タップ</p>
+      <div class="answer"><span class="who">Ardar Codar</span> の声。<br>意味・世間体という<b>理由つき</b>。論理的だが、心のモヤモヤは消してくれない。</div>
+    </button>
+  </div>
+
+  <p class="rule">理由が出てくるブレーキは Ardar Codar。<br>理由のない「なんかやだ」が、<b>Jr. の声</b>。</p>
+</section>
+
+<!-- ================= 時間軸 ================= -->
+<section aria-labelledby="h-time">
+  <h2 id="h-time">事前と最中で、配置が真逆になる</h2>
+  <p class="sub">一枚の絵で固定しようとすると永遠に決まらない。時間軸が変数だった。</p>
+
+  <div class="seg time-seg" role="group" aria-label="時点の切り替え">
+    <button type="button" data-time="0" aria-pressed="true">事前（やる？やらない？）</button>
+    <button type="button" data-time="1" aria-pressed="false">最中（やってる）</button>
+  </div>
+
+  <div class="meters">
+    <div class="meter">
+      <div class="label"><span>好奇心（HSS）「やりたい」</span><span class="state" id="cur-state"></span></div>
+      <div class="bar"><div class="fill curiosity" id="cur-fill"></div></div>
+    </div>
+    <div class="meter">
+      <div class="label"><span>ブレーキ（HSP違和感＋Ardar Codar）</span><span class="state" id="fr-state"></span></div>
+      <div class="bar"><div class="fill friction" id="fr-fill"></div></div>
+    </div>
+    <p class="meter-note" id="time-note"></p>
+  </div>
+</section>
+
+<!-- ================= 但し書き ================= -->
+<section>
+  <div class="caveat">
+    <h2>⚠️ ただし、これで終わった話ではない</h2>
+    <p>「動いたら分かる」は、再現が保証されない。1回動いて納得できたからといって、継続的に動けるとは限らない。今も「動きたいけど動けない」ことがある。</p>
+    <p>切り替えは完了形ではなく、今も揺れている途中。辿り着いた顔をしないために、この但し書きを残しておく。</p>
+  </div>
+</section>
+</div>
+
+<script>
+const phases=[
+  {
+    me:"Ardar Codar の声を採用していた。世間の常識や世間体が、大事だった。",
+    jr:"「なんかやだ……」\n（言葉にならないまま、押し殺される）",
+    jrTag:"ブレーキ（却下され続ける）",
+    ac:"「常識だ、やれ。論理的に説明できないなら採用しなくていい」",
+    acTag:"アクセル（採用されていた）",
+    dim:"jr",
+    result:"<strong>結果：消耗。</strong>論理は正しいはずなのに、心はずっとモヤモヤ。違和感が溜まっていく。"
+  },
+  {
+    me:"一度、Jr. の声に従ってみようと決めて、やってみた。",
+    jr:"「やりたい。もう必要だ」",
+    jrTag:"アクセル（採用）",
+    ac:"「やめとけ、損するよ」",
+    acTag:"聞こえているが、採用しない",
+    dim:"ac",
+    result:"<strong>結果：動けた。</strong>そして気づく。Ardar Codar は敵じゃなかった。傷つくことや失敗から、自分を守るために言ってくれていた。"
+  },
+  {
+    me:"両方の声をしっかり聞いて、矛盾を抱えたまま、落とし所を見つけて動く。「心配してくれてたんだな、ありがとう。危険性はあるけど、今回は直感の声に従ってみるね」",
+    jr:"「やりたい」も「なんかやだ」も、どちらも鳴る",
+    jrTag:"聞く（最終拒否権はここ）",
+    ac:"「危ないよ。……心配なんだよ」",
+    acTag:"聞く（守護者として）",
+    dim:null,
+    result:"<strong>現在地。</strong>聞き手の私の仕事は「Jr.を採用する」ことではなく、両方を聞いて落とし所を見つけること。声の大きい方に流されない。でも切り捨てもしない。"
+  }
+];
+const times=[
+  {cur:72,fr:78,curS:"鳴っている",frS:"鳴っている",
+   note:"<b>両方鳴る。綱引き。悩む。</b>「やりたい」と「でも……」が同時に来るのが事前。ここでリトマス試験紙（理由の有無）の出番。"},
+  {cur:100,fr:0,curS:"満タン",frS:"消える",
+   note:"<b>我を忘れる。違和感ゼロ。</b>3Dプリンターに没頭している最中、違和感はゼロなのに好奇心は満タンだった。だから好奇心は違和感の裏返しではなく、別の源から湧く二本立て。"}
+];
+
+const $=id=>document.getElementById(id);
+function setPhase(i){
+  const p=phases[i];
+  $("me-say").textContent=p.me;
+  $("jr-say").textContent=p.jr;
+  $("jr-tag").textContent=p.jrTag;
+  $("ac-say").textContent=p.ac;
+  $("ac-tag").textContent=p.acTag;
+  $("v-jr").classList.toggle("dim",p.dim==="jr");
+  $("v-ac").classList.toggle("dim",p.dim==="ac");
+  $("phase-result").innerHTML=p.result;
+  document.querySelectorAll("[data-phase]").forEach(b=>
+    b.setAttribute("aria-pressed",String(+b.dataset.phase===i)));
+}
+function setTime(i){
+  const t=times[i];
+  $("cur-fill").style.width=t.cur+"%";
+  $("fr-fill").style.width=t.fr+"%";
+  $("cur-state").textContent=t.curS;
+  $("fr-state").textContent=t.frS;
+  $("time-note").innerHTML=t.note;
+  document.querySelectorAll("[data-time]").forEach(b=>
+    b.setAttribute("aria-pressed",String(+b.dataset.time===i)));
+}
+document.querySelectorAll("[data-phase]").forEach(b=>
+  b.addEventListener("click",()=>setPhase(+b.dataset.phase)));
+document.querySelectorAll("[data-time]").forEach(b=>
+  b.addEventListener("click",()=>setTime(+b.dataset.time)));
+document.querySelectorAll(".chip").forEach(c=>
+  c.addEventListener("click",()=>c.classList.toggle("open")));
+setPhase(0);
+setTime(0);
+</script>
+</body>
+</html>
